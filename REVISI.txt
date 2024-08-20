@@ -1,0 +1,12 @@
+Revisi HRIS 
+- Karyawan dikategorikan PKWT & PKWTT 
+- ⁠Izin dipisah dengan sakit 
+- ⁠Izin dikategorikan terlambat, pulang lebih awal, kegiatan lagi, di unit kantor lain 
+- ⁠Kontrak di otomatiskan dengan reset cuti 
+- ⁠Cuti status karyawan berbeda (pkwtt per januari, pkwt per awal masuk) 
+- ⁠Kolom bpjs 
+- ⁠Medsos 
+- ⁠No KK atau identitas keluarga 
+- ⁠Export seluruh karyawan dengan excel 
+- ⁠Warning kontrak 1 bulan 
+- ⁠Form upload berkas
