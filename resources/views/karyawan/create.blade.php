@@ -272,6 +272,8 @@
                                 <option value="D2" selected>D2</option>
                             @elseif(old('pendidikan') == 'D3')
                                 <option value="D3" selected>D3</option>
+                            @elseif(old('pendidikan') == 'D4')
+                                <option value="D4" selected>D4</option>
                             @elseif(old('pendidikan') == 'S1')
                                 <option value="S1" selected>S1</option>
                             @elseif(old('pendidikan') == 'S2')
@@ -285,6 +287,7 @@
                                 <option value="D1">D1</option>
                                 <option value="D2">D2</option>
                                 <option value="D3">D3</option>
+                                <option value="D4">D4</option>
                                 <option value="S1">S1</option>
                                 <option value="S2">S2</option>
                                 <option value="S3">S3</option>

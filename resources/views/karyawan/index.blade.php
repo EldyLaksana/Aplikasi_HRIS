@@ -22,7 +22,7 @@
             <div class="card-header">
                 <form action="/karyawan">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 mb-2">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Cari ..." name="cari"
                                     value="{{ request('cari') }}">
