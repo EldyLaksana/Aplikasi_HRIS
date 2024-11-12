@@ -35,8 +35,10 @@ class KaryawanController extends Controller
             $karyawans->where('karyawans.departemen_id', 'like', request('departemen'));
         }
 
+        $karyawans = $karyawans->paginate(20)->appends(request()->except('page'));
+
         return view('karyawan.index', [
-            'karyawans' => $karyawans->paginate(20),
+            'karyawans' => $karyawans,
             'departemen' => Departemen::all()
         ]);
     }

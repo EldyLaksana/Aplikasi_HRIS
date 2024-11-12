@@ -33,7 +33,7 @@
                         <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown">Menu <i
                                 class="fa-solid fa-caret-down"></i></button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/absensikaryawan/{{ $karyawan->id }}">Absensi</a></li>
+                            {{-- <li><a class="dropdown-item" href="/absensikaryawan/{{ $karyawan->id }}">Absensi</a></li> --}}
                             @if ($karyawan->baru)
                             @else
                                 <li><a class="dropdown-item" href="/cutikaryawan/{{ $karyawan->id }}">Cuti</a></li>
