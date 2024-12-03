@@ -40,6 +40,7 @@
                             @endif
                             <li><a class="dropdown-item" href="/sakitkaryawan/{{ $karyawan->id }}">Sakit</a></li>
                             <li><a class="dropdown-item" href="/izinkaryawan/{{ $karyawan->id }}">Izin</a></li>
+                            <li><a class="dropdown-item" href="/peringatankaryawan/{{ $karyawan->id }}">Peringatan</a></li>
                         </ul>
                     </div>
                     {{-- End --}}
@@ -209,6 +210,26 @@
                         <label for="alamat" class="form-label">Alamat :</label>
                         <input type="text" class="form-control" name="alamat" id="alamat"
                             value="{{ $karyawan->alamat }}" readonly>
+                    </div>
+                    <hr>
+                    <div class="my-3" style="font-size: 20px">
+                        <h4>Pelatihan dan Pengalaman</h4>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pelatihan1" class="form-label">Pelatihan 1:</label>
+                        <textarea name="pelatihan1" id="pelatihan1" cols="10" rows="1" class="form-control">{{ $karyawan->pelatihan1 }}</textarea>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pelatihan2" class="form-label">Pelatihan 2:</label>
+                        <textarea name="pelatihan2" id="pelatihan2" cols="10" rows="1" class="form-control">{{ $karyawan->pelatihan2 }}</textarea>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pengalaman1" class="form-label">Pengalaman 1:</label>
+                        <textarea name="pengalaman1" id="pengalaman1" cols="10" rows="1" class="form-control">{{ $karyawan->pengalaman1 }}</textarea>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pengalaman2" class="form-label">Pengalaman 2:</label>
+                        <textarea name="pengalaman2" id="pengalaman2" cols="10" rows="1" class="form-control">{{ $karyawan->pengalaman2 }}</textarea>
                     </div>
                     <hr>
                     <div class="my-3" style="font-size: 20px">

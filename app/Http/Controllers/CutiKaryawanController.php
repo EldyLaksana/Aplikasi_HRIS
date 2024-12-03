@@ -16,12 +16,22 @@ class CutiKaryawanController extends Controller
     {
         $karyawan = Karyawan::find($id);
         $id = $karyawan->id;
-        // return ($karyawan);
-        $cutiKaryawans = CutiKaryawan::where('karyawan_id', $id)->latest()->paginate(10);
-        $cutiTahunan = CutiKaryawan::where('karyawan_id', $id)->where('cuti', 'Tahunan')->sum('jumlah_hari');
 
-        $jatahCuti = 12;
-        $jatahCuti -= $cutiTahunan;
+        $tahunSekarang = now()->year;
+        // return ($karyawan);
+        // Ambil total cuti tahunan yang digunakan di tahun ini
+        $cutiTahunan = CutiKaryawan::where('karyawan_id', $id)
+            ->where('cuti', 'Tahunan')
+            ->whereYear('created_at', $tahunSekarang) // Filter berdasarkan tahun berjalan
+            ->sum('jumlah_hari');
+
+        // Hitung jatah cuti
+        $jatahCuti = 12 - $cutiTahunan;
+
+        // Ambil data cuti karyawan
+        $cutiKaryawans = CutiKaryawan::where('karyawan_id', $id)
+            ->latest()
+            ->paginate(10);
 
         return view('cutiKaryawan.index', [
             'karyawan' => $karyawan,
@@ -40,12 +50,16 @@ class CutiKaryawanController extends Controller
         // $cutiKaryawans = CutiKaryawan::where('karyawan_id', $id)->get();
         // $cutiTahunan = CutiKaryawan::where('karyawan_id', $id)->where('cuti', 'Tahunan')->sum('jumlah_hari');
         $id = $karyawan->id;
-        $cutiKaryawans = CutiKaryawan::where('karyawan_id', $id)->get();
-        $cutiTahunan = CutiKaryawan::where('karyawan_id', $id)->where('cuti', 'Tahunan')->sum('jumlah_hari');
+        $currentYear = now()->year;
 
-        $jatahCuti = 12;
+        // Hitung total cuti tahunan yang sudah diambil di tahun berjalan
+        $cutiTahunan = CutiKaryawan::where('karyawan_id', $karyawan->id)
+            ->where('cuti', 'Tahunan')
+            ->whereYear('created_at', $currentYear) // Hanya hitung cuti tahun ini
+            ->sum('jumlah_hari');
 
-        $jatahCuti -= $cutiTahunan;
+        // Hitung jatah cuti yang tersisa
+        $jatahCuti = 12 - $cutiTahunan;
 
         return view('cutiKaryawan.create', [
             'karyawan' => $karyawan,
@@ -94,15 +108,21 @@ class CutiKaryawanController extends Controller
      */
     public function edit(CutiKaryawan $cutiKaryawan, $id)
     {
+        // Cari data cuti berdasarkan ID
         $cutiKaryawan = CutiKaryawan::find($id);
-        $karyawan_id = $cutiKaryawan->karyawan_id;
 
-        $karyawan = Karyawan::where('id', $karyawan_id)->first();
-        $cutiTahunan = CutiKaryawan::where('karyawan_id', $karyawan_id)->where('cuti', 'Tahunan')->sum('jumlah_hari');
+        // Ambil data karyawan terkait
+        $karyawan = Karyawan::find($cutiKaryawan->karyawan_id);
 
-        $jatahCuti = 12;
+        // Hitung total cuti tahunan yang telah digunakan pada tahun berjalan
+        $currentYear = now()->year;
+        $cutiTahunan = CutiKaryawan::where('karyawan_id', $karyawan->id)
+            ->where('cuti', 'Tahunan')
+            ->whereYear('created_at', $currentYear) // Hanya data tahun berjalan
+            ->sum('jumlah_hari');
 
-        $jatahCuti -= $cutiTahunan;
+        // Hitung jatah cuti yang tersisa
+        $jatahCuti = 12 - $cutiTahunan;
         // return ($karyawan);
         return view('cutiKaryawan.edit', [
             'cutiKaryawan' => $cutiKaryawan,

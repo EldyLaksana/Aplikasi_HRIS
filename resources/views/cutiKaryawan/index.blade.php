@@ -25,13 +25,14 @@
                     <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown">Menu <i
                             class="fa-solid fa-caret-down"></i></button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/absensikaryawan/{{ $karyawan->id }}">Absensi</a></li>
+                        {{-- <li><a class="dropdown-item" href="/absensikaryawan/{{ $karyawan->id }}">Absensi</a></li> --}}
                         @if ($karyawan->baru)
                         @else
                             <li><a class="dropdown-item" href="/cutikaryawan/{{ $karyawan->id }}">Cuti</a></li>
                         @endif
                         <li><a class="dropdown-item" href="/sakitkaryawan/{{ $karyawan->id }}">Sakit</a></li>
                         <li><a class="dropdown-item" href="/izinkaryawan/{{ $karyawan->id }}">Izin</a></li>
+                        <li><a class="dropdown-item" href="/peringatankaryawan/{{ $karyawan->id }}">Peringatan</a></li>
                     </ul>
                 </div>
                 <a href="/karyawan/{{ $karyawan->id }}" type="button" class="btn btn-success"><i

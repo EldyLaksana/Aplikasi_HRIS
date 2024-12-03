@@ -1,12 +1,18 @@
 @extends('dashboard.layouts.main')
 
+@if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Izin Karyawan "{{ $karyawan->nama }}"</h1>
+        <h1 class="h2">Peringatan Karyawan "{{ $karyawan->nama }}"</h1>
     </div>
-
     @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert akert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -14,10 +20,10 @@
     <section>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/karyawan" style="text-decoration: none"> Karyawan</a></li>
-                <li class="breadcrumb-item"><a href="/karyawan/{{ $karyawan->id }}" style="text-decoration: none"> Detail
+                <li class="breadcrumb-item"><a href="/karyawan" style="text-decoration: none">Karyawan</a></li>
+                <li class="breadcrumb-item"><a href="/karyawan/{{ $karyawan->id }}" style="text-decoration: none">Detail
                         Karyawan</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Izin karyawan</li>
+                <li class="breadcrumb-item active" aria-current="page">Peringatan Karyawan</li>
             </ol>
         </nav>
         <div class="card mb-3">
@@ -36,9 +42,8 @@
                         <li><a class="dropdown-item" href="/peringatankaryawan/{{ $karyawan->id }}">Peringatan</a></li>
                     </ul>
                 </div>
-                <a href="/karyawan/{{ $karyawan->id }}" type="button" class="btn btn-success">
-                    <i class="fa-solid fa-arrow-left"></i> Kembali
-                </a>
+                <a href="/karyawan/{{ $karyawan->id }}" type="button" class="btn btn-success"><i
+                        class="fa-solid fa-arrow-left"></i> Kembali</a>
             </div>
             <div class="card-body">
                 <div class="mb-3">
@@ -70,20 +75,20 @@
 
                 <hr>
 
-                <h5>Daftar izin karyawan</h5>
+                <h5>Daftar peringatan karyawan</h5>
                 <div class="gap-2 d-grid d-lg-flex justify-content-lg-start">
                     <div class="mb-3">
-                        <a href="/izinkaryawan/{{ $karyawan->id }}/create" type="button" class="btn btn-success"><i
+                        <a href="/peringatankaryawan/{{ $karyawan->id }}/create" type="button" class="btn btn-success"><i
                                 class="fa-solid fa-file-circle-plus"></i> Tambah</a>
                     </div>
-                    @if ($izins->count() > 0)
+                    {{-- @if ($absensis->count() > 0)
                         <div class="mb-3">
-                            <a href="/exportizin/{{ $karyawan->id }}" type="button" class="btn btn-success"
+                            <a href="/exportperingatan/{{ $karyawan->id }}" type="button" class="btn btn-success"
                                 target="_blank">
                                 <i class="fa-solid fa-file-excel"></i> Export
                             </a>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
 
                 <div class="table-responsive col-lg-9">
@@ -92,29 +97,30 @@
                             <tr class="table-info">
                                 <th class="text-center" style="width: 3%">No</th>
                                 <th>Tanggal</th>
-                                <th>Izin</th>
-                                <th>Jam</th>
-                                <th>Alasan</th>
+                                <th>Keterangan</th>
+                                <th>Surat Peringatan</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($izins as $izin)
+                            @forelse ($peringatans as $peringatan)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($izin->tanggal)->translatedFormat('d F Y') }}</td>
-                                    <td>{{ $izin->izin }}</td>
-                                    @if ($izin->jam_selesai)
-                                        <td>{{ \Carbon\Carbon::parse($izin->jam)->format('H:i') }} s/d
-                                            {{ \Carbon\Carbon::parse($izin->jam_selesai)->format('H:i') }}</td>
-                                    @else
-                                        <td>{{ \Carbon\Carbon::parse($izin->jam)->format('H:i') }}</td>
-                                    @endif
-                                    <td>{{ $izin->alasan }}</td>
+                                    <td>{{ $peringatan->tanggal }}</td>
+                                    <td>{{ $peringatan->keterangan }}</td>
                                     <td>
-                                        <a href="/izinkaryawan/{{ $izin->id }}/edit" class="badge bg-warning"
-                                            style="text-decoration: none"><i class="fa-solid fa-pen"></i> Edit</a>
-                                        <form action="/izinkaryawan/{{ $izin->id }}" method="post" class="d-inline">
+                                        @if ($peringatan->file)
+                                            <a href="{{ asset('storage/' . $peringatan->file) }}" target="_blank"
+                                                type="button" class="badge bg-success" style="text-decoration: none"> Lihat
+                                                file</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="/peringatankaryawan/{{ $peringatan->id }}/edit" class="badge bg-warning"
+                                            style="text-decoration: none" title=""><i class="fa-solid fa-pen"></i>
+                                            Edit</a>
+                                        <form action="/peringatankaryawan/{{ $peringatan->id }}" method="post"
+                                            class="d-inline">
                                             @method('delete')
                                             @csrf
                                             <button class="badge bg-danger border-0"
@@ -125,13 +131,14 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">Tidak ada data izin karyawan.</td>
+                                    <td colspan="5" class="text-center">Tidak ada data keterlambatan karyawan.</td>
                                 </tr>
                             @endforelse
                         </tbody>
+
                     </table>
                     <div class="d-flex justify-content-center">
-                        {{ $izins->links() }}
+                        {{-- {{ $sakits->links() }} --}}
                     </div>
                 </div>
             </div>

@@ -84,6 +84,10 @@ class KaryawanController extends Controller
             'instagram' => '',
             'tiktok' => '',
             'x' => '',
+            'pelatihan1' => '',
+            'pelatihan2' => '',
+            'pengalaman1' => '',
+            'pengalaman2' => '',
             'tanggal_masuk' => 'required',
             'kontrak' => '',
             'nama1' => '',
@@ -163,6 +167,10 @@ class KaryawanController extends Controller
             'instagram' => '',
             'tiktok' => '',
             'x' => '',
+            'pelatihan1' => '',
+            'pelatihan2' => '',
+            'pengalaman1' => '',
+            'pengalaman2' => '',
             'tanggal_masuk' => 'required',
             'kontrak' => '',
             'nama1' => '',
@@ -280,7 +288,7 @@ class KaryawanController extends Controller
 
         // return ($validateData);
         Karyawan::where('id', $id)->update($validateData);
-        $cutiKaryawan->map->delete();
+        // $cutiKaryawan->map->delete();
         // $izin->map->delete();
         // $sakit->map->delete();
         // $absensi->map->delete();

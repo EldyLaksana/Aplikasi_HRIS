@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Edit Sakit Karyawan "{{ $karyawan->nama }}"</h1>
+        <h1 class="h2">Edit Peringatan Karyawan "{{ $karyawan->nama }}"</h1>
     </div>
 
     @if (session()->has('success'))
@@ -11,15 +11,17 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
     <section>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/karyawan" style="text-decoration: none">Karyawan</a></li>
                 <li class="breadcrumb-item"><a href="/karyawan/{{ $karyawan->id }}" style="text-decoration: none">Detail
                         karyawan</a></li>
-                <li class="breadcrumb-item"><a href="/sakitkaryawan/{{ $karyawan->id }}" style="text-decoration: none">Sakit
+                <li class="breadcrumb-item"><a href="/peringatankaryawan/{{ $karyawan->id }}"
+                        style="text-decoration: none">Peringatan
                         karyawan</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Sakit karyawan</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit peringatan karyawan</li>
             </ol>
         </nav>
         <div class="card mb-3">
@@ -52,7 +54,7 @@
                             class="border rounded-3">
                     @endif
                 </div>
-                <form action="/sakitkaryawan/{{ $sakit->id }}" method="post" enctype="multipart/form-data">
+                <form action="/peringatankaryawan/{{ $peringatan->id }}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="row">
@@ -83,7 +85,7 @@
                         <div class="mb-3 col-lg-4">
                             <label for="tanggal" class="form-label">Tanggal :</label>
                             <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal"
-                                id="tanggal" placeholder="dd/mm/yyyy" value="{{ old('tanggal', $sakit->tanggal) }}">
+                                id="tanggal" placeholder="dd/mm/yyyy" value="{{ old('tanggal', $peringatan->tanggal) }}">
                             @error('tanggal')
                                 <div class="invalid-feedback">
                                     Tanggal harus diisi
@@ -92,7 +94,7 @@
                         </div>
                         <div class="mb-3 col-lg-4">
                             <label for="tanggal" class="form-label" style="color: white">Tanggal :</label>
-                            <p class="form-control">{{ $sakit->tanggal }}</p>
+                            <p class="form-control">{{ $peringatan->tanggal }}</p>
                         </div>
                     </div>
 
@@ -100,7 +102,7 @@
                     <div class="mb-3 col-lg-6">
                         <label for="keterangan" class="form-label">Keterangan :</label>
                         <input type="text" class="form-control @error('keterangan') is-invalid @enderror"
-                            name="keterangan" id="keterangan" value="{{ old('keterangan', $sakit->keterangan) }}">
+                            name="keterangan" id="keterangan" value="{{ old('keterangan', $peringatan->keterangan) }}">
                         @error('keterangan')
                             <div class="invalid-feedback">
                                 Keterangan harus diisi
@@ -108,11 +110,11 @@
                         @enderror
                     </div>
                     <div class="mb-3 col-lg-4">
-                        <label for="file" class="form-label">Surat keterangan sakit</label>
-                        <input type="hidden" name="fileLama" id="" value="{{ $sakit->file }}">
+                        <label for="file" class="form-label">Surat keterangan peringatan</label>
+                        <input type="hidden" name="fileLama" id="" value="{{ $peringatan->file }}">
                         <div class="mb-3">
-                            @if ($sakit->file)
-                                <img src="{{ asset('storage/' . $sakit->file) }}" alt="" width="300"
+                            @if ($peringatan->file)
+                                <img src="{{ asset('storage/' . $peringatan->file) }}" alt="" width="300"
                                     height="400" class="file_preview d-block">
                             @else
                                 <img class="gambar-preview img-fluid mb-3 col-sm-6">

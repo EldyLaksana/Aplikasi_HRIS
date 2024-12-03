@@ -14,6 +14,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KaryawanKeluarController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PeringatanController;
 use App\Http\Controllers\SakitController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     // End
 
     // Cuti Karyawan
-    Route::get('/cutikaryawan/{id}', [CutiKaryawanController::class, 'index']);
+    Route::get('/cutikaryawan/{id}', [CutiKaryawanController::class, 'index'])->name('cuti.index');
 
     Route::get('/cutikaryawan/{id}/create', [CutiKaryawanController::class, 'create']);
 
@@ -91,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // Sakit
-    Route::get('/sakitkaryawan/{id}', [SakitController::class, 'index']);
+    Route::get('/sakitkaryawan/{id}', [SakitController::class, 'index'])->name('sakit.index');
 
     Route::get('/sakitkaryawan/{id}/create', [SakitController::class, 'create']);
 
@@ -107,7 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
     // End
 
     // Izin
-    Route::get('/izinkaryawan/{id}', [IzinController::class, 'index']);
+    Route::get('/izinkaryawan/{id}', [IzinController::class, 'index'])->name('izin.index');
 
     Route::get('/izinkaryawan/{id}/create', [IzinController::class, 'create']);
 
@@ -122,6 +123,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/izinkaryawan/{id}', [IzinController::class, 'destroy']);
     // End
 
+    // Peringatan
+    Route::get('/peringatankaryawan/{id}', [PeringatanController::class, 'index'])->name('peringatan.index');
+
+    Route::get('/peringatankaryawan/{id}/create', [PeringatanController::class, 'create']);
+
+    Route::post('/peringatankaryawan', [PeringatanController::class, 'store']);
+
+    Route::get('/peringatankaryawan/{id}/edit', [PeringatanController::class, 'edit']);
     // Karyawan keluar
     Route::resource('/karyawankeluar', KaryawanKeluarController::class);
 

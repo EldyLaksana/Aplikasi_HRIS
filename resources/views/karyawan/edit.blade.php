@@ -330,6 +330,26 @@
                     </div>
                     <hr>
                     <div class="my-3" style="font-size: 20px">
+                        <h4>Pelatihan dan Pengalaman</h4>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pelatihan1" class="form-label">Pelatihan 1:</label>
+                        <textarea name="pelatihan1" id="pelatihan1" cols="10" rows="1" class="form-control">{{ old('pelatihan1', $karyawan->pelatihan1) }}</textarea>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pelatihan2" class="form-label">Pelatihan 2:</label>
+                        <textarea name="pelatihan2" id="pelatihan2" cols="10" rows="1" class="form-control">{{ old('pelatihan2', $karyawan->pelatihan2) }}</textarea>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pengalaman1" class="form-label">Pengalaman 1:</label>
+                        <textarea name="pengalaman1" id="pengalaman1" cols="10" rows="1" class="form-control">{{ old('pengalaman1', $karyawan->pengalaman1) }}</textarea>
+                    </div>
+                    <div class="mb-3 col-lg-8">
+                        <label for="pengalaman2" class="form-label">Pengalaman 2:</label>
+                        <textarea name="pengalaman2" id="pengalaman2" cols="10" rows="1" class="form-control">{{ old('pengalaman2', $karyawan->pengalaman2) }}</textarea>
+                    </div>
+                    <hr>
+                    <div class="my-3" style="font-size: 20px">
                         <h4>Sosial Media</h4>
                     </div>
                     <div class="row">

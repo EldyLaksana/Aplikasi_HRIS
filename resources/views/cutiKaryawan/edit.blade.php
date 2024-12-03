@@ -34,6 +34,7 @@
                         @endif
                         <li><a class="dropdown-item" href="/sakitkaryawan/{{ $karyawan->id }}">Sakit</a></li>
                         <li><a class="dropdown-item" href="/izinkaryawan/{{ $karyawan->id }}">Izin</a></li>
+                        <li><a class="dropdown-item" href="/peringatankaryawan/{{ $karyawan->id }}">Peringatan</a></li>
                     </ul>
                 </div>
                 <a href="/cutikaryawan/{{ $karyawan->id }}" type="button" class="btn btn-success"><i

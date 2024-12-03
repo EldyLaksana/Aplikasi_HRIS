@@ -57,7 +57,7 @@ class SakitController extends Controller
         // return $validateData;
 
         if ($request->file('file')) {
-            $validateData['file'] = $request->file('file')->store('file');
+            $validateData['file'] = $request->file('file')->store('file_sakit');
         }
 
         Sakit::create($validateData);
@@ -111,7 +111,7 @@ class SakitController extends Controller
                 Storage::delete($request->fileLama);
             }
 
-            $validateData['file'] = $request->file('file')->store('file');
+            $validateData['file'] = $request->file('file')->store('file_sakit');
         }
 
         Sakit::where('id', $sakit->id)->update($validateData);
